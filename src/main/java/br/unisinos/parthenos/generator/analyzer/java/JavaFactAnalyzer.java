@@ -4,7 +4,6 @@ import br.unisinos.parthenos.generator.analyzer.FactAnalyzer;
 import br.unisinos.parthenos.generator.analyzer.java.entities.ClassAnalyzer;
 import br.unisinos.parthenos.generator.analyzer.java.entities.InterfaceAnalyzer;
 import br.unisinos.parthenos.generator.annotation.Language;
-import br.unisinos.parthenos.generator.enumerator.SourceLanguage;
 import br.unisinos.parthenos.generator.exception.SourceFileParseException;
 import br.unisinos.parthenos.generator.exception.TypeIsNotClassOrInterfaceException;
 import br.unisinos.parthenos.generator.exception.TypeIsNotPresentException;
@@ -18,13 +17,11 @@ import lombok.Getter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
 @Getter
-@Language(SourceLanguage.JAVA)
+@Language("java")
 @AllArgsConstructor
 public class JavaFactAnalyzer implements FactAnalyzer {
   private File sourceFile;

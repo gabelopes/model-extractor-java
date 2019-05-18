@@ -4,6 +4,7 @@ import br.unisinos.parthenos.generator.analyzer.java.entities.mixins.EntityLocat
 import br.unisinos.parthenos.generator.analyzer.java.entities.mixins.creator.ModifiersCreator;
 import br.unisinos.parthenos.generator.analyzer.java.representation.QualifiedName;
 import br.unisinos.parthenos.generator.enumerator.VertexDescriptor;
+import br.unisinos.parthenos.generator.enumerator.java.JavaVertexDescriptor;
 import br.unisinos.parthenos.generator.prolog.fact.Fact;
 import br.unisinos.parthenos.generator.prolog.fact.Vertex;
 import com.github.javaparser.ast.Modifier;
@@ -43,10 +44,10 @@ public abstract class BranchTypeAnalyzer<T extends TypeDeclaration<?>> extends T
     }
 
     if (((ClassOrInterfaceDeclaration) this.getTypeDeclaration()).isInterface()) {
-      return VertexDescriptor.INTERFACE;
+      return JavaVertexDescriptor.INTERFACE;
     }
 
-    return VertexDescriptor.CLASS;
+    return JavaVertexDescriptor.CLASS;
   }
 
   @Override

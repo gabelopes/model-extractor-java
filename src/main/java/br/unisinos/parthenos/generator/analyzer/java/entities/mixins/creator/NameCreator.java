@@ -1,6 +1,6 @@
 package br.unisinos.parthenos.generator.analyzer.java.entities.mixins.creator;
 
-import br.unisinos.parthenos.generator.enumerator.EdgeLabel;
+import br.unisinos.parthenos.generator.enumerator.java.JavaEdgeLabel;
 import br.unisinos.parthenos.generator.prolog.fact.Edge;
 import br.unisinos.parthenos.generator.prolog.fact.Vertex;
 
@@ -14,6 +14,6 @@ public interface NameCreator {
       return null;
     }
 
-    return new Edge(typeVertex.getLabel(), EdgeLabel.NAME, this.getName());
+    return new Edge(typeVertex.getLabel(), JavaEdgeLabel.NAME, this.getName());
   }
 }

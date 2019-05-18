@@ -4,7 +4,7 @@ import br.unisinos.parthenos.generator.analyzer.java.entities.ConcreteClassAnaly
 import br.unisinos.parthenos.generator.analyzer.java.entities.mixins.creator.VertexCreator;
 import br.unisinos.parthenos.generator.annotation.Language;
 import br.unisinos.parthenos.generator.enumerator.EdgeLabel;
-import br.unisinos.parthenos.generator.enumerator.SourceLanguage;
+import br.unisinos.parthenos.generator.enumerator.java.JavaEdgeLabel;
 import br.unisinos.parthenos.generator.enumerator.java.Modifier;
 import br.unisinos.parthenos.generator.enumerator.java.PrimitiveType;
 import br.unisinos.parthenos.generator.io.SourceFile;
@@ -25,7 +25,7 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 @Getter
-@Language(SourceLanguage.JAVA)
+@Language("java")
 public class JavaKnowledgeBaseProcessor implements KnowledgeBaseProcessor {
   private Set<Vertex> branchTypes;
 
@@ -84,7 +84,7 @@ public class JavaKnowledgeBaseProcessor implements KnowledgeBaseProcessor {
   }
 
   private Edge createSourceEdge(SourceFile sourceFile, Vertex typeVertex) {
-    return new Edge(typeVertex.getLabel(), EdgeLabel.SOURCE, sourceFile.getFileAtom());
+    return new Edge(typeVertex.getLabel(), JavaEdgeLabel.SOURCE, sourceFile.getFileAtom());
   }
 
   private void addSourceEdges(Map<SourceFile, KnowledgeBase> knowledgeBases) {

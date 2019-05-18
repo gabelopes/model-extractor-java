@@ -2,6 +2,7 @@ package br.unisinos.parthenos.generator.analyzer.java.entities;
 
 import br.unisinos.parthenos.generator.analyzer.java.entities.mixins.creator.LeafTypeCreator;
 import br.unisinos.parthenos.generator.enumerator.EdgeLabel;
+import br.unisinos.parthenos.generator.enumerator.java.JavaEdgeLabel;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.Type;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,6 @@ public class ImplementedTypeAnalyzer implements LeafTypeCreator {
 
   @Override
   public EdgeLabel getLeafTypeLabel() {
-    return EdgeLabel.INTERFACE;
+    return JavaEdgeLabel.INTERFACE;
   }
 }

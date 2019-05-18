@@ -4,6 +4,8 @@ import br.unisinos.parthenos.generator.analyzer.java.entities.mixins.EntityLocat
 import br.unisinos.parthenos.generator.analyzer.java.representation.QualifiedName;
 import br.unisinos.parthenos.generator.enumerator.EdgeLabel;
 import br.unisinos.parthenos.generator.enumerator.VertexDescriptor;
+import br.unisinos.parthenos.generator.enumerator.java.JavaEdgeLabel;
+import br.unisinos.parthenos.generator.enumerator.java.JavaVertexDescriptor;
 import br.unisinos.parthenos.generator.prolog.fact.Fact;
 import br.unisinos.parthenos.generator.prolog.fact.Vertex;
 import com.github.javaparser.ast.Modifier;
@@ -31,7 +33,7 @@ public class MethodAnalyzer extends MemberAnalyzer implements EntityLocator<Meth
 
   @Override
   protected EdgeLabel getPartLabel() {
-    return EdgeLabel.METHOD;
+    return JavaEdgeLabel.METHOD;
   }
 
   @Override
@@ -50,7 +52,7 @@ public class MethodAnalyzer extends MemberAnalyzer implements EntityLocator<Meth
 
   @Override
   public VertexDescriptor getDescriptor() {
-    return VertexDescriptor.METHOD;
+    return JavaVertexDescriptor.METHOD;
   }
 
   @Override
@@ -64,8 +66,8 @@ public class MethodAnalyzer extends MemberAnalyzer implements EntityLocator<Meth
   }
 
   @Override
-  public EdgeLabel getLeafTypeLabel() {
-    return EdgeLabel.RETURN;
+  public JavaEdgeLabel getLeafTypeLabel() {
+    return JavaEdgeLabel.RETURN;
   }
 
   @Override

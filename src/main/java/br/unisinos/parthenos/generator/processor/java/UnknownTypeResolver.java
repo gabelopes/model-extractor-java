@@ -4,6 +4,7 @@ import br.unisinos.parthenos.generator.analyzer.java.entities.ConcreteClassAnaly
 import br.unisinos.parthenos.generator.analyzer.java.representation.QualifiedName;
 import br.unisinos.parthenos.generator.enumerator.EdgeLabel;
 import br.unisinos.parthenos.generator.enumerator.VertexDescriptor;
+import br.unisinos.parthenos.generator.enumerator.java.JavaVertexDescriptor;
 import br.unisinos.parthenos.generator.prolog.fact.Edge;
 import br.unisinos.parthenos.generator.prolog.fact.Fact;
 import br.unisinos.parthenos.generator.prolog.fact.Vertex;
@@ -16,9 +17,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
-import static br.unisinos.parthenos.generator.enumerator.EdgeLabel.*;
-import static br.unisinos.parthenos.generator.enumerator.VertexDescriptor.CLASS;
-import static br.unisinos.parthenos.generator.enumerator.VertexDescriptor.UNKNOWN_TYPE;
+import static br.unisinos.parthenos.generator.enumerator.java.JavaEdgeLabel.*;
 
 @Getter
 @AllArgsConstructor
@@ -26,7 +25,7 @@ public class UnknownTypeResolver {
   private Collection<KnowledgeBase> knowledgeBases;
 
   private Set<Vertex> findUnknownTypes(KnowledgeBase knowledgeBase) {
-    return knowledgeBase.findVertices(UNKNOWN_TYPE, null);
+    return knowledgeBase.findVertices(JavaVertexDescriptor.UNKNOWN_TYPE, null);
   }
 
   private boolean isProperLabel(Fact fact) {
@@ -41,8 +40,8 @@ public class UnknownTypeResolver {
   }
 
   private boolean isBranchType(Vertex vertex) {
-    return vertex.getDescriptor() == VertexDescriptor.CLASS
-      || vertex.getDescriptor() == VertexDescriptor.INTERFACE;
+    return vertex.getDescriptor() == JavaVertexDescriptor.CLASS
+      || vertex.getDescriptor() == JavaVertexDescriptor.INTERFACE;
   }
 
   private Vertex findBranchType(KnowledgeBase knowledgeBase, Vertex vertex) {
@@ -66,7 +65,7 @@ public class UnknownTypeResolver {
   }
 
   private String getPackage(KnowledgeBase knowledgeBase, Vertex typeVertex) {
-    final Edge packageEdge = knowledgeBase.findEdge(typeVertex.getLabel(), EdgeLabel.PACKAGE, null);
+    final Edge packageEdge = knowledgeBase.findEdge(typeVertex.getLabel(), PACKAGE, null);
 
     if (packageEdge != null) {
       return packageEdge.getTail().getContent().toString();
@@ -76,7 +75,7 @@ public class UnknownTypeResolver {
   }
 
   private String getName(KnowledgeBase knowledgeBase, Vertex typeVertex) {
-    final Edge packageEdge = knowledgeBase.findEdge(typeVertex.getLabel(), EdgeLabel.NAME, null);
+    final Edge packageEdge = knowledgeBase.findEdge(typeVertex.getLabel(), NAME, null);
 
     if (packageEdge != null) {
       return packageEdge.getTail().getContent().toString();
@@ -92,8 +91,8 @@ public class UnknownTypeResolver {
 
     final Vertex vertex = (Vertex) fact;
 
-    return vertex.getDescriptor() == CLASS
-      || vertex.getDescriptor() == VertexDescriptor.INTERFACE;
+    return vertex.getDescriptor() == JavaVertexDescriptor.CLASS
+      || vertex.getDescriptor() == JavaVertexDescriptor.INTERFACE;
   }
 
   private Vertex findTypeWithNameAndPackage(KnowledgeBase knowledgeBase, String typeName, String typePackage) {
@@ -207,7 +206,7 @@ public class UnknownTypeResolver {
   }
 
   private void setTypeAsDefault(Vertex typeVertex) {
-    typeVertex.setDescriptor(VertexDescriptor.DEFAULT_TYPE);
+    typeVertex.setDescriptor(JavaVertexDescriptor.DEFAULT_TYPE);
   }
 
   private void resolveFor(KnowledgeBase knowledgeBase) {

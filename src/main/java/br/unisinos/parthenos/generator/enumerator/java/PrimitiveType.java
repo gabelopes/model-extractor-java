@@ -16,7 +16,7 @@ public enum PrimitiveType implements VertexCreator {
 
   @Override
   public VertexDescriptor getDescriptor() {
-    return VertexDescriptor.PRIMITIVE;
+    return JavaVertexDescriptor.PRIMITIVE;
   }
 
   @Override

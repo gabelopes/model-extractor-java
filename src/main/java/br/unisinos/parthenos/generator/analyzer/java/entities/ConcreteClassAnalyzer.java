@@ -6,6 +6,7 @@ import br.unisinos.parthenos.generator.analyzer.java.entities.mixins.creator.Pac
 import br.unisinos.parthenos.generator.analyzer.java.entities.mixins.creator.VertexCreator;
 import br.unisinos.parthenos.generator.analyzer.java.representation.QualifiedName;
 import br.unisinos.parthenos.generator.enumerator.VertexDescriptor;
+import br.unisinos.parthenos.generator.enumerator.java.JavaVertexDescriptor;
 import br.unisinos.parthenos.generator.prolog.fact.Fact;
 import br.unisinos.parthenos.generator.prolog.fact.Vertex;
 import lombok.AllArgsConstructor;
@@ -37,10 +38,10 @@ public class ConcreteClassAnalyzer implements FactAnalyzer, VertexCreator, NameC
   @Override
   public VertexDescriptor getDescriptor() {
     if (this.getConcreteClass().isInterface()) {
-      return VertexDescriptor.INTERFACE;
+      return JavaVertexDescriptor.INTERFACE;
     }
 
-    return VertexDescriptor.CLASS;
+    return JavaVertexDescriptor.CLASS;
   }
 
   @Override

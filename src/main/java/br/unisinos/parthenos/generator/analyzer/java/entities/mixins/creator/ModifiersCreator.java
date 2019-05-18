@@ -1,7 +1,7 @@
 package br.unisinos.parthenos.generator.analyzer.java.entities.mixins.creator;
 
-import br.unisinos.parthenos.generator.enumerator.EdgeLabel;
-import br.unisinos.parthenos.generator.enumerator.VertexDescriptor;
+import br.unisinos.parthenos.generator.enumerator.java.JavaEdgeLabel;
+import br.unisinos.parthenos.generator.enumerator.java.JavaVertexDescriptor;
 import br.unisinos.parthenos.generator.prolog.fact.Edge;
 import br.unisinos.parthenos.generator.prolog.fact.Fact;
 import br.unisinos.parthenos.generator.prolog.fact.Vertex;
@@ -16,11 +16,11 @@ public interface ModifiersCreator {
 
   default Vertex createModifierVertex(Modifier modifier) {
     final Atom modifierAtom = new Atom(modifier.asString());
-    return new Vertex(VertexDescriptor.MODIFIER, modifierAtom);
+    return new Vertex(JavaVertexDescriptor.MODIFIER, modifierAtom);
   }
 
   default Edge createModifierEdge(Vertex vertex, Vertex modifierVertex) {
-    return new Edge(vertex.getLabel(), EdgeLabel.MODIFIER, modifierVertex.getLabel());
+    return new Edge(vertex.getLabel(), JavaEdgeLabel.MODIFIER, modifierVertex.getLabel());
   }
 
   default Set<Fact> createModifiersFacts(Vertex vertex) {

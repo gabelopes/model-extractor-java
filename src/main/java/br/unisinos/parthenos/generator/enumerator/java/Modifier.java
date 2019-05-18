@@ -17,7 +17,7 @@ public enum Modifier implements VertexCreator {
 
   @Override
   public VertexDescriptor getDescriptor() {
-    return VertexDescriptor.MODIFIER;
+    return JavaVertexDescriptor.MODIFIER;
   }
 
   @Override

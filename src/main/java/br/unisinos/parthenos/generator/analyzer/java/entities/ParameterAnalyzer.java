@@ -4,6 +4,8 @@ import br.unisinos.parthenos.generator.analyzer.java.entities.mixins.EntityLocat
 import br.unisinos.parthenos.generator.analyzer.java.representation.QualifiedName;
 import br.unisinos.parthenos.generator.enumerator.EdgeLabel;
 import br.unisinos.parthenos.generator.enumerator.VertexDescriptor;
+import br.unisinos.parthenos.generator.enumerator.java.JavaEdgeLabel;
+import br.unisinos.parthenos.generator.enumerator.java.JavaVertexDescriptor;
 import br.unisinos.parthenos.generator.prolog.fact.Edge;
 import br.unisinos.parthenos.generator.prolog.fact.Fact;
 import br.unisinos.parthenos.generator.prolog.fact.Vertex;
@@ -16,8 +18,6 @@ import lombok.Getter;
 
 import java.util.Collections;
 import java.util.Set;
-
-import static br.unisinos.parthenos.generator.enumerator.EdgeLabel.ORDER;
 
 @AllArgsConstructor
 @Getter
@@ -33,7 +33,7 @@ public class ParameterAnalyzer extends MemberAnalyzer implements EntityLocator<P
 
   @Override
   protected EdgeLabel getPartLabel() {
-    return EdgeLabel.PARAMETER;
+    return JavaEdgeLabel.PARAMETER;
   }
 
   @Override
@@ -48,7 +48,7 @@ public class ParameterAnalyzer extends MemberAnalyzer implements EntityLocator<P
 
   @Override
   public VertexDescriptor getDescriptor() {
-    return VertexDescriptor.PARAMETER;
+    return JavaVertexDescriptor.PARAMETER;
   }
 
   @Override
@@ -63,7 +63,7 @@ public class ParameterAnalyzer extends MemberAnalyzer implements EntityLocator<P
 
   @Override
   public EdgeLabel getLeafTypeLabel() {
-    return EdgeLabel.TYPE;
+    return JavaEdgeLabel.TYPE;
   }
 
   @Override
@@ -73,7 +73,7 @@ public class ParameterAnalyzer extends MemberAnalyzer implements EntityLocator<P
 
   private Edge createOrderEdge(Vertex parameterVertex) {
     final Number<Integer> orderNumber = new Number<>(this.getParameterOrder());
-    return new Edge(parameterVertex.getLabel(), ORDER, orderNumber);
+    return new Edge(parameterVertex.getLabel(), JavaEdgeLabel.ORDER, orderNumber);
   }
 
   @Override

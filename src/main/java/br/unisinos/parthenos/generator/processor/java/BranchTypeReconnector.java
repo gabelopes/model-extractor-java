@@ -1,6 +1,6 @@
 package br.unisinos.parthenos.generator.processor.java;
 
-import br.unisinos.parthenos.generator.enumerator.VertexDescriptor;
+import br.unisinos.parthenos.generator.enumerator.java.JavaVertexDescriptor;
 import br.unisinos.parthenos.generator.prolog.fact.Fact;
 import br.unisinos.parthenos.generator.prolog.fact.Vertex;
 import br.unisinos.parthenos.generator.prolog.knowledgeBase.KnowledgeBase;
@@ -28,7 +28,7 @@ public class BranchTypeReconnector {
 
     final Vertex vertex = (Vertex) fact;
 
-    return vertex.getDescriptor() == VertexDescriptor.UNKNOWN_TYPE
+    return vertex.getDescriptor() == JavaVertexDescriptor.UNKNOWN_TYPE
       && vertex.getLabel().equals(typeVertex.getLabel());
   }
 

@@ -1,6 +1,7 @@
 package br.unisinos.parthenos.generator.analyzer.java.entities;
 
 import br.unisinos.parthenos.generator.enumerator.EdgeLabel;
+import br.unisinos.parthenos.generator.enumerator.java.JavaEdgeLabel;
 import br.unisinos.parthenos.generator.prolog.fact.Fact;
 import br.unisinos.parthenos.generator.prolog.fact.Vertex;
 import br.unisinos.parthenos.generator.prolog.knowledgeBase.KnowledgeBase;
@@ -58,7 +59,7 @@ public class InterfaceAnalyzer extends BranchTypeAnalyzer<ClassOrInterfaceDeclar
     final String methodName = methodDeclaration.getNameAsString();
     return KnowledgeBase
       .from(facts)
-      .findEdges(null, EdgeLabel.NAME, new Text(methodName))
+      .findEdges(null, JavaEdgeLabel.NAME, new Text(methodName))
       .size();
   }
 

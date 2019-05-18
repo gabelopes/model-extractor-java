@@ -1,6 +1,6 @@
 package br.unisinos.parthenos.generator.prolog.knowledgeBase.java;
 
-import br.unisinos.parthenos.generator.enumerator.VertexDescriptor;
+import br.unisinos.parthenos.generator.enumerator.java.JavaVertexDescriptor;
 import br.unisinos.parthenos.generator.prolog.fact.Fact;
 import br.unisinos.parthenos.generator.prolog.fact.Vertex;
 import br.unisinos.parthenos.generator.prolog.knowledgeBase.KnowledgeBase;
@@ -15,8 +15,8 @@ public class JavaKnowledgeBase extends KnowledgeBase {
 
     final Vertex vertex = (Vertex) fact;
 
-    return vertex.getDescriptor() == VertexDescriptor.CLASS
-      || vertex.getDescriptor() == VertexDescriptor.INTERFACE;
+    return vertex.getDescriptor() == JavaVertexDescriptor.CLASS
+      || vertex.getDescriptor() == JavaVertexDescriptor.INTERFACE;
   }
 
   public Set<Vertex> findBranchTypes() {

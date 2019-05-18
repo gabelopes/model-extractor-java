@@ -3,6 +3,7 @@ package br.unisinos.parthenos.generator.analyzer.java.entities;
 import br.unisinos.parthenos.generator.analyzer.java.entities.mixins.EntityLocator;
 import br.unisinos.parthenos.generator.analyzer.java.representation.QualifiedName;
 import br.unisinos.parthenos.generator.enumerator.VertexDescriptor;
+import br.unisinos.parthenos.generator.enumerator.java.JavaVertexDescriptor;
 import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.type.Type;
 import lombok.AllArgsConstructor;
@@ -39,18 +40,18 @@ public class LeafTypeAnalyzer extends TypeAnalyzer implements EntityLocator<Type
   @Override
   public VertexDescriptor getDescriptor() {
     if (this.getType().isPrimitiveType()) {
-      return VertexDescriptor.PRIMITIVE;
+      return JavaVertexDescriptor.PRIMITIVE;
     }
 
     if (this.getType().isVoidType()) {
-      return VertexDescriptor.NO_TYPE;
+      return JavaVertexDescriptor.NO_TYPE;
     }
 
     if (this.getType().isArrayType()) {
-      return VertexDescriptor.ARRAY;
+      return JavaVertexDescriptor.ARRAY;
     }
 
-    return VertexDescriptor.UNKNOWN_TYPE;
+    return JavaVertexDescriptor.UNKNOWN_TYPE;
   }
 
   @Override
