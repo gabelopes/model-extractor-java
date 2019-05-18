@@ -3,7 +3,6 @@ package br.unisinos.parthenos.generator.processor.java;
 import br.unisinos.parthenos.generator.analyzer.java.entities.ConcreteClassAnalyzer;
 import br.unisinos.parthenos.generator.analyzer.java.representation.QualifiedName;
 import br.unisinos.parthenos.generator.enumerator.EdgeLabel;
-import br.unisinos.parthenos.generator.enumerator.VertexDescriptor;
 import br.unisinos.parthenos.generator.enumerator.java.JavaVertexDescriptor;
 import br.unisinos.parthenos.generator.prolog.fact.Edge;
 import br.unisinos.parthenos.generator.prolog.fact.Fact;

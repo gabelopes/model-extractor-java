@@ -14,11 +14,11 @@ public class ClassAnalyzer extends InterfaceAnalyzer {
     super(interfaceDeclaration);
   }
 
-  private List<FieldDeclaration> getFields() {
+  protected List<FieldDeclaration> getFields() {
     return this.getTypeDeclaration().getFields();
   }
 
-  private Set<Fact> createFieldFacts(Vertex typeVertex, FieldDeclaration fieldDeclaration) {
+  protected Set<Fact> createFieldFacts(Vertex typeVertex, FieldDeclaration fieldDeclaration) {
     final FieldAnalyzer fieldAnalyzer = new FieldAnalyzer(typeVertex, fieldDeclaration);
     return fieldAnalyzer.retrieveFacts();
   }

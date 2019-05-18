@@ -13,6 +13,7 @@ import com.github.javaparser.ast.type.Type;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -20,7 +21,7 @@ import java.util.Set;
 public class FieldVariableAnalyzer extends MemberAnalyzer implements EntityLocator<VariableDeclarator> {
   private Vertex typeVertex;
   private VariableDeclarator variableDeclarator;
-  private Set<Modifier> modifiers;
+  private List<Modifier> modifiers;
 
   @Override
   protected Vertex getPartVertex() {

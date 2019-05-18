@@ -1,6 +1,5 @@
 package br.unisinos.parthenos.generator.analyzer.java.entities;
 
-import br.unisinos.parthenos.generator.enumerator.EdgeLabel;
 import br.unisinos.parthenos.generator.enumerator.java.JavaEdgeLabel;
 import br.unisinos.parthenos.generator.prolog.fact.Fact;
 import br.unisinos.parthenos.generator.prolog.fact.Vertex;

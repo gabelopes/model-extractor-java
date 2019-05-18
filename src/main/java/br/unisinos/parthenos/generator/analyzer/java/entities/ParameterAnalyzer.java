@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -52,7 +53,7 @@ public class ParameterAnalyzer extends MemberAnalyzer implements EntityLocator<P
   }
 
   @Override
-  public Set<Modifier> getModifiers() {
+  public List<Modifier> getModifiers() {
     return this.getParameter().getModifiers();
   }
 

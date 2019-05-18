@@ -20,24 +20,24 @@ public class FieldAnalyzer implements FactAnalyzer, EntityLocator<FieldDeclarati
   private Vertex typeVertex;
   private FieldDeclaration fieldDeclaration;
 
-  private List<VariableDeclarator> getVariables() {
+  protected List<VariableDeclarator> getVariables() {
     return this.getFieldDeclaration().getVariables();
   }
 
-  private Set<Modifier> getModifiers() {
+  protected List<Modifier> getModifiers() {
     return this.getFieldDeclaration().getModifiers();
   }
 
-  private Set<Fact> generateVariableFacts(VariableDeclarator variableDeclarator) {
+  protected Set<Fact> createVariableFacts(VariableDeclarator variableDeclarator) {
     final FieldVariableAnalyzer fieldVariableAnalyzer = new FieldVariableAnalyzer(this.getTypeVertex(), variableDeclarator, this.getModifiers());
     return fieldVariableAnalyzer.retrieveFacts();
   }
 
-  private Set<Fact> generateVariablesFacts() {
+  private Set<Fact> createVariablesFacts() {
     final Set<Fact> variablesFacts = new HashSet<>();
 
     for (VariableDeclarator variableDeclarator : this.getVariables()) {
-      variablesFacts.addAll(this.generateVariableFacts(variableDeclarator));
+      variablesFacts.addAll(this.createVariableFacts(variableDeclarator));
     }
 
     return variablesFacts;
@@ -50,6 +50,6 @@ public class FieldAnalyzer implements FactAnalyzer, EntityLocator<FieldDeclarati
 
   @Override
   public Set<Fact> retrieveFacts() {
-    return this.generateVariablesFacts();
+    return this.createVariablesFacts();
   }
 }

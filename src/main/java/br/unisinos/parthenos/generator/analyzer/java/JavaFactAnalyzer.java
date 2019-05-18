@@ -9,6 +9,7 @@ import br.unisinos.parthenos.generator.exception.TypeIsNotClassOrInterfaceExcept
 import br.unisinos.parthenos.generator.exception.TypeIsNotPresentException;
 import br.unisinos.parthenos.generator.prolog.fact.Fact;
 import com.github.javaparser.JavaParser;
+import com.github.javaparser.ParseResult;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
@@ -28,9 +29,14 @@ public class JavaFactAnalyzer implements FactAnalyzer {
 
   @Override
   public Set<Fact> retrieveFacts() {
-    System.out.println("Retrieving facts for " + sourceFile);
-    final CompilationUnit parsedSource = parseSource();
-    final FactAnalyzer factAnalyzer;
+    System.out.println("Retrieving facts for " + this.getSourceFile());
+    final ParseResult<CompilationUnit> parseResult = parseSource();
+
+    if (!parseResult.isSuccessful()) {
+      throw new SourceFileParseException(this.getSourceFile());
+    }
+
+    final CompilationUnit parsedSource = parseResult.getResult().get();
     final ClassOrInterfaceDeclaration primaryType;
 
     try {
@@ -39,18 +45,20 @@ public class JavaFactAnalyzer implements FactAnalyzer {
       return null;
     }
 
-    if (primaryType.isInterface()) {
-      factAnalyzer = new InterfaceAnalyzer(primaryType);
-    } else {
-      factAnalyzer = new ClassAnalyzer(primaryType);
-    }
-
-    return factAnalyzer.retrieveFacts();
+    return this.getTypeAnalyzer(primaryType).retrieveFacts();
   }
 
-  private CompilationUnit parseSource() {
+  protected FactAnalyzer getTypeAnalyzer(ClassOrInterfaceDeclaration typeDeclaration) {
+    if (typeDeclaration.isInterface()) {
+      return new InterfaceAnalyzer(typeDeclaration);
+    }
+
+    return new ClassAnalyzer(typeDeclaration);
+  }
+
+  private ParseResult<CompilationUnit> parseSource() {
     try {
-      return JavaParser.parse(this.getSourceFile());
+      return new JavaParser().parse(this.getSourceFile());
     } catch (FileNotFoundException e) {
       throw new SourceFileParseException(this.getSourceFile());
     }

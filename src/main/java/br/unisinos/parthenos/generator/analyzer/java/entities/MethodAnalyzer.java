@@ -56,7 +56,7 @@ public class MethodAnalyzer extends MemberAnalyzer implements EntityLocator<Meth
   }
 
   @Override
-  public Set<Modifier> getModifiers() {
+  public List<Modifier> getModifiers() {
     return this.getMethodDeclaration().getModifiers();
   }
 

@@ -9,13 +9,14 @@ import br.unisinos.parthenos.generator.prolog.term.Atom;
 import com.github.javaparser.ast.Modifier;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public interface ModifiersCreator {
-  Set<Modifier> getModifiers();
+  List<Modifier> getModifiers();
 
   default Vertex createModifierVertex(Modifier modifier) {
-    final Atom modifierAtom = new Atom(modifier.asString());
+    final Atom modifierAtom = new Atom(modifier.getKeyword().asString());
     return new Vertex(JavaVertexDescriptor.MODIFIER, modifierAtom);
   }
 

@@ -13,6 +13,7 @@ import com.github.javaparser.ast.body.TypeDeclaration;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -51,7 +52,7 @@ public abstract class BranchTypeAnalyzer<T extends TypeDeclaration<?>> extends T
   }
 
   @Override
-  public Set<Modifier> getModifiers() {
+  public List<Modifier> getModifiers() {
     return this.getTypeDeclaration().getModifiers();
   }
 
