@@ -13,7 +13,8 @@ public enum Modifier implements VertexCreator {
   ABSTRACT,
   TRANSIENT,
   SYNCHRONIZED,
-  VOLATILE;
+  VOLATILE,
+  STRICTFP;
 
   @Override
   public VertexDescriptor getDescriptor() {

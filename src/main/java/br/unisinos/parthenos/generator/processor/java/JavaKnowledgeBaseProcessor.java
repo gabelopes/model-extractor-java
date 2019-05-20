@@ -26,26 +26,32 @@ import java.util.stream.Collectors;
 @Getter
 @Language("java")
 public class JavaKnowledgeBaseProcessor implements KnowledgeBaseProcessor {
+  private static final String JAVA_LANG_PACKAGE = "java.lang";
+
   private Set<Vertex> branchTypes;
 
   public JavaKnowledgeBaseProcessor() {
     this.branchTypes = new HashSet<>();
   }
 
-  private Set<ClassInfo> getDefaultTypes() {
+  private Set<Class<?>> getDefaultTypes() {
     try {
-      return ClassPath.from(this.getClass().getClassLoader()).getTopLevelClasses("java.lang");
+      return ClassPath.from(KnowledgeBaseProcessor.class.getClassLoader()).getTopLevelClasses(JAVA_LANG_PACKAGE)
+        .stream()
+        .map(ClassInfo::load)
+        .filter(clazz -> java.lang.reflect.Modifier.isPublic(clazz.getModifiers()))
+        .collect(Collectors.toSet());
     } catch (IOException e) {
       return new HashSet<>();
     }
   }
 
   private Set<Fact> createDefaultTypesFacts() {
-    final Set<ClassInfo> defaultTypes = this.getDefaultTypes();
+    final Set<Class<?>> defaultTypes = this.getDefaultTypes();
     final Set<Fact> defaultTypeFacts = new HashSet<>();
 
-    for (ClassInfo defaultType : defaultTypes) {
-      final ConcreteClassAnalyzer concreteClassAnalyzer = new ConcreteClassAnalyzer(defaultType.load());
+    for (Class<?> defaultType : defaultTypes) {
+      final ConcreteClassAnalyzer concreteClassAnalyzer = new ConcreteClassAnalyzer(defaultType);
       defaultTypeFacts.addAll(concreteClassAnalyzer.retrieveFacts());
     }
 
