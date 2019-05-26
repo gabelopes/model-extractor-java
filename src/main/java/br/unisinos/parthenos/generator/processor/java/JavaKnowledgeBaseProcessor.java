@@ -4,6 +4,7 @@ import br.unisinos.parthenos.generator.analyzer.java.entities.ConcreteClassAnaly
 import br.unisinos.parthenos.generator.analyzer.java.entities.mixins.creator.VertexCreator;
 import br.unisinos.parthenos.generator.annotation.Language;
 import br.unisinos.parthenos.generator.enumerator.java.JavaEdgeLabel;
+import br.unisinos.parthenos.generator.enumerator.java.JavaVertexDescriptor;
 import br.unisinos.parthenos.generator.enumerator.java.Modifier;
 import br.unisinos.parthenos.generator.enumerator.java.PrimitiveType;
 import br.unisinos.parthenos.generator.io.SourceFile;
@@ -14,6 +15,7 @@ import br.unisinos.parthenos.generator.prolog.fact.Fact;
 import br.unisinos.parthenos.generator.prolog.fact.Vertex;
 import br.unisinos.parthenos.generator.prolog.knowledgeBase.KnowledgeBase;
 import br.unisinos.parthenos.generator.prolog.knowledgeBase.java.JavaKnowledgeBase;
+import br.unisinos.parthenos.generator.prolog.term.Atom;
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.ClassPath.ClassInfo;
 import lombok.Getter;
@@ -27,6 +29,7 @@ import java.util.stream.Collectors;
 @Language("java")
 public class JavaKnowledgeBaseProcessor implements KnowledgeBaseProcessor {
   private static final String JAVA_LANG_PACKAGE = "java.lang";
+  private static final String VOID_TYPE = "void";
 
   private Set<Vertex> branchTypes;
 
@@ -80,6 +83,15 @@ public class JavaKnowledgeBaseProcessor implements KnowledgeBaseProcessor {
     }
   }
 
+  private void addVoidType(Collection<KnowledgeBase> knowledgeBases) {
+    final Atom voidAtom = new Atom(VOID_TYPE);
+    final Vertex voidType = new Vertex(JavaVertexDescriptor.NO_TYPE, voidAtom);
+
+    for (KnowledgeBase knowledgeBase : knowledgeBases) {
+      knowledgeBase.add(voidType);
+    }
+  }
+
   private void addSupportedModifiers(Collection<KnowledgeBase> knowledgeBases) {
     final Set<Vertex> modifiersVertices = this.createVertices(Modifier.values());
 
@@ -118,6 +130,7 @@ public class JavaKnowledgeBaseProcessor implements KnowledgeBaseProcessor {
     unknownTypeResolver.resolve();
 
     this.addSupportedModifiers(knowledgeBases);
+    this.addVoidType(knowledgeBases);
     this.addSupportedPrimitiveTypes(knowledgeBases);
     this.addSupportedTypes(knowledgeBases);
   }
