@@ -2,6 +2,7 @@ package br.unisinos.parthenos.generator.analyzer.java.entities;
 
 import br.unisinos.parthenos.generator.analyzer.java.entities.mixins.EntityLocator;
 import br.unisinos.parthenos.generator.analyzer.java.entities.mixins.creator.ModifiersCreator;
+import br.unisinos.parthenos.generator.analyzer.java.entities.mixins.creator.RootCreator;
 import br.unisinos.parthenos.generator.analyzer.java.representation.QualifiedName;
 import br.unisinos.parthenos.generator.enumerator.VertexDescriptor;
 import br.unisinos.parthenos.generator.enumerator.java.JavaVertexDescriptor;
@@ -18,7 +19,7 @@ import java.util.Set;
 
 @Getter
 @AllArgsConstructor
-public abstract class BranchTypeAnalyzer<T extends TypeDeclaration<?>> extends TypeAnalyzer implements ModifiersCreator, EntityLocator<TypeDeclaration<?>> {
+public abstract class BranchTypeAnalyzer<T extends TypeDeclaration<?>> extends TypeAnalyzer implements RootCreator, ModifiersCreator, EntityLocator<TypeDeclaration<?>> {
   private TypeDeclaration<T> typeDeclaration;
 
   protected abstract Set<Fact> retrieveSpecificFacts();
@@ -67,6 +68,7 @@ public abstract class BranchTypeAnalyzer<T extends TypeDeclaration<?>> extends T
 
     final Vertex typeVertex = this.createVertex();
 
+    typeFacts.add(this.createRoot());
     typeFacts.addAll(this.createModifiersFacts(typeVertex));
     typeFacts.addAll(this.retrieveSpecificFacts());
 
